@@ -54,3 +54,9 @@ class TestTasks(SimpleTestCase):
     def test_simple_equation(self):
         assert 1 == 2
 ```
+
+
+### Important django.urls utility functions
+1. <b>reverse()</b>: It take these arguments (viewname, urlconf=None, args=None, kwargs=None, current_app=None) and returns URL.
+2. <b>resolve()</b>: It take these arguments (path, urlconf=None) and path is the URL path we want to resolve. Returns ResolverMatch object that allows you to access various metadata about the resolved URL. If the URL does not resolve, the function raises a Resolver404 exception (a subclass of Http404) .
+
