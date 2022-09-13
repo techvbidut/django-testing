@@ -60,3 +60,51 @@ class TestTasks(SimpleTestCase):
 1. <b>reverse()</b>: It take these arguments (viewname, urlconf=None, args=None, kwargs=None, current_app=None) and returns URL.
 2. <b>resolve()</b>: It take these arguments (path, urlconf=None) and path is the URL path we want to resolve. Returns ResolverMatch object that allows you to access various metadata about the resolved URL. If the URL does not resolve, the function raises a Resolver404 exception (a subclass of Http404) .
 
+### Important Testing tools in Django
+##### Test Client
+The test client is a Python class that acts as a dummy web browser, allowing you to test your views and interact with your Django-powered application programmatically.
+
+Example:
+```
+from django.test import Client
+c = Client()
+response = c.post('/login/', {'username': 'john', 'password': 'smith'})
+print(response.status_code)
+```
+
+##### assertEquals 
+It is a function to check if two variables are equal, for purposes of automated testing.
+
+Example:
+```
+from contacts.models import Contact 
+
+def test_str(self):
+        contact = Contact(first_name='Bidut', last_name='Karki')
+        self.assertEquals( 
+            str(contact),  
+            'Bidut Karki',
+        )
+```
+
+##### assertTemplateUsed
+Asserts that the template with the given name was used in rendering the response.
+
+Example:
+```
+from django.test import TestCase, Client
+from django.urls import reverse, resolve
+
+class TestViews(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.list_url = reverse('list')
+
+    def test_project_list_GET(self):
+        response = self.client.get(self.list_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'budget/project-list.html')
+
+```
